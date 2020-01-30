@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Успех!{% endblock %}
+{% block main_content %}
+
+            <h1>Все готово, {{ new_user.first_name }}!</h1>
+            <p>Воспользуйтесь следующей формой:</p>
+            <p>Ваш аккаунт был создан! Теперь можно <a href="{% url 'accounts:login' %}">залогиниться</a> </p>
+
+{% endblock %}

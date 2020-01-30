@@ -1,0 +1,60 @@
+{% load static %}
+<html>
+    <head>
+        <title>{% block title %}Списки дел!{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+              crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                crossorigin="anonymous"></script>
+
+        {% block extra_head %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="side_bar col" >
+                    {% block side_bar %}
+                        {% if user.is_authenticated %}
+                            <p>{{ user.first_name }}</p>
+
+                            <ul>
+                                <li><a href="{% url 'accounts:edit' %}">Профиль</a></li>
+                                <li><a href="{% url 'tasks:create' %}">Добавить задачу</a></li>
+                                <li><a href="{% url 'tasks:list' %}">Задачи</a></li>
+                                <li><a href="{% url 'accounts:logout' %}">Выйти</a></li>
+                            </ul>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+
+                <div class="main_content col-8">
+                    {% if messages %}
+                        <div class="row">
+                            <ul class="alert alert-{{ message.tags }} alert-dismissable">
+                                {% for message in messages %}
+                                <li>
+                                    {{ message }}
+                                    <a href="#" class="close" data-dismiss="alert"> x</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% block main_content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
+
+

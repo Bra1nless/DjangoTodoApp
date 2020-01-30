@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Добавить задачу {% endblock %}
+
+{% block extra_head %} <script src="{% static 'js/script.js' %}"></script> {% endblock %}
+
+{% block main_content %}
+            <h1>Создать задачу</h1>
+            <form action="." method="post" class="task-create">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button class="add" type="submit">+</button>
+            </form>
+{% endblock %}
